@@ -66,6 +66,7 @@ async function run() {
         const productCollection = productDB.collection("products");
 
         //--------------------------- Routes for user operations ---------------------------
+
         // Endpoint to register or login user
         app.post("/user", async (req, res) => {
             const user = req.body;
@@ -99,6 +100,7 @@ async function run() {
         //--------------------------- EOF Routes for user operations ---------------------------
 
         //--------------------------- Routes for product operations ---------------------------
+
         // Add new product
         app.post('/products', async (req, res) => {
             const { name, description, price, imageURL, stock } = req.body;
@@ -226,8 +228,8 @@ async function run() {
                 // Retrieve the PaymentIntent from Stripe using its ID
                 const paymentIntent = await stripe.paymentIntents.retrieve(paymentIntentId);
 
-                // Handle payment confirmation logic here, update stock or any other relevant data
-                // For example, update product stock after successful payment
+                // Handle payment confirmation logic here, 
+                // update product stock after successful payment
                 if (paymentIntent.status === 'succeeded') {
                     const updatedStock = product.stock - quantity;
                     const status = updatedStock === 0 ? 'Out of Stock' : 'In Stock';
